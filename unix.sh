@@ -8,12 +8,9 @@ if [ ! -x "$(command -v wget)" ]; then
   echo "wget not installed."
   if [ "$(uname -s)" == "Linux" ]; then
     if [ -x "$(command -v curl)" ]; then
-    echo "Downloading wget..."
+      echo "Downloading wget binary. This may be buggy. Install wget with your package manager if you have any issues."
+      read -p "Press enter to continue..."
       curl -# -Lo ./wget "https://raw.githubusercontent.com/yunchih/static-binaries/master/wget"
-      if [ ! -x "./wget" ]; then
-        echo "Allowing execution of wget. You may be asked for your password."
-        sudo chmod +x ./wget
-      fi
       wgetCommand="./wget"
     else
       echo "curl is not installed. Please install curl or wget into your path."

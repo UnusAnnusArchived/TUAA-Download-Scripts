@@ -1,6 +1,6 @@
 # We want to download wget even if it's in the path bc powershell has a stupid ass alias to Invoke-WebRequest that acts nothing like wget but still calls itself wget.
 if (!(Test-Path "wget.exe")) {
-  clear
+  Clear-Host
   Write-Host "Downloading wget..."
   try {
     Invoke-WebRequest "https://eternallybored.org/misc/wget/1.21.4/32/wget.exe" -O wget.exe
@@ -27,15 +27,14 @@ function startDl {
   try {
     .\wget.exe "$episodeListUrl" -nv -O "episode-list.txt"
     if (!($LASTEXITCODE -eq 0)) {
-      clear
+      Clear-Host
       Write-Host "Failed to download episode list. Is there a school/work firewall blocking your access? Please check your network connection and try again or try a different mirror!" -ForegroundColor Red
       Write-Host "Press enter to exit..."
       Read-Host
       exit
     }
-    Write-Host "$LASTEXITCODE"
   } catch {
-    clear
+    Clear-Host
     Write-Host "Failed to download episode list. Is there a school/work firewall blocking your access? Please check your network connection and try again or try a different mirror!" -ForegroundColor Red
     Write-Host "Press enter to exit..."
     Read-Host
@@ -43,7 +42,7 @@ function startDl {
   }
 
   foreach($url in Get-Content .\episode-list.txt) {
-    $episode = $url -Replace '(s\d{2}\.e\d{3})', '$1'
+    $episode = $url -Replace '^.*(s\d{2}\.e\d{3}).*$', '$1'
     if (Test-Path "$episode.mp4") {
       Write-Host "$episode already downloaded. Skipping."
       continue
@@ -60,7 +59,7 @@ function startDl {
 }
 
 function custom {
-  clear
+  Clear-Host
   Write-Host "Press enter to return."
   $url = Read-Host "URL"
   if ($url -eq "") {
@@ -76,7 +75,7 @@ function custom {
 }
 
 function run {
-  clear
+  Clear-Host
   Write-Host "Please make a pull request or DM me on Discord if you`'d like your mirror to be added."
   Write-Host ""
   Write-Host "Which mirror would you like to download from? Please type the number and hit enter."
