@@ -1,3 +1,6 @@
+$esc = [char]27
+
+
 # We want to download wget even if it's in the path bc powershell has a stupid ass alias to Invoke-WebRequest that acts nothing like wget but still calls itself wget.
 if (!(Test-Path "wget.exe")) {
   Clear-Host
@@ -75,15 +78,13 @@ function custom {
 }
 
 function run {
-  Clear-Host
   Write-Host "Please make a pull request or DM me on Discord if you`'d like your mirror to be added."
   Write-Host ""
   Write-Host "Which mirror would you like to download from? Please type the number and hit enter."
   Write-Host "1. Custom (requires an episode list)"
-  Write-Host "2. https://r2.unusann.us/ (Official)"
+  Write-Host "2. https://r2.unusann.us/ (Currently shut down)"
   Write-Host "3. https://rust-lore.dpaste.org/unusannus/"
-  Write-Host "4. https://qtqzrt.com/ua/files/ (does not include s01.e368)"
-  Write-Host "5. Exit"
+  Write-Host "4. Exit"
   $mirror = Read-Host "Mirror"
 
   switch ($mirror[0]) {
@@ -92,20 +93,21 @@ function run {
     }
     "2" {
       # official
-      startDl "https://r2.unusann.us" "https://r2.unusann.us/episode-list.txt"
+      Clear-Host
+      Write-Host "$esc[1;31mThe official cdn is currently shut down!$esc[0m"
+      Write-Host ""
+      run
+      # startDl "https://r2.unusann.us" "https://r2.unusann.us/episode-list.txt"
     }
     "3" {
       # rust lore
       startDl "https://rust-lore.dpaste.org/unusannus" "https://rust-lore.dpaste.org/unusannus/sorted_mp4_list.txt"
     }
     "4" {
-      # qtqzrt
-      startDl "https://qtqzrt.com/ua/files" "https://r2.unusann.us/qtqzrt-episode-list.txt"
-    }
-    "5" {
       exit
     }
   }
 }
 
+Clear-Host
 run

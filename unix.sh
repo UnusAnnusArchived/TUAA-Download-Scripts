@@ -98,28 +98,29 @@ custom() {
 }
 
 run() {
-  clear
   echo "Please make a pull request or DM me on Discord if you'd like your mirror to be added."
   echo ""
   echo "Which mirror would you like to download from? Please type the number and hit enter."
   PS3="Mirror: "
-  select yn in "Custom (requires an episode list)" "https://r2.unusann.us/ (Official)" "https://rust-lore.dpaste.org/unusannus/" "https://qtqzrt.com/ua/files/ (does not include s01.e368)" "Exit"; do
+  select yn in "Custom (requires an episode list)" "https://r2.unusann.us/ (Currently shut down)" "https://rust-lore.dpaste.org/unusannus/" "Exit"; do
     case ${REPLY::1} in
       1 )
         custom
         break;;
       2 )
-        startDl "https://r2.unusann.us" "https://r2.unusann.us/episode-list.txt"
+        clear
+        echo -e "\\033[1;31mThe official cdn is currently shut down!\\033[0m"
+        echo ""
+        run
+      #   startDl "https://r2.unusann.us" "https://r2.unusann.us/episode-list.txt"
         break;;
       3 )
         startDl "https://rust-lore.dpaste.org/unusannus" "https://rust-lore.dpaste.org/unusannus/sorted_mp4_list.txt"
         break;;
-      4 )
-        startDl "https://qtqzrt.com/ua/files" "https://r2.unusann.us/qtqzrt-episode-list.txt"
-        break;;
-      5 ) exit;;
+      4 ) exit;;
     esac
   done
 }
 
+clear
 run
