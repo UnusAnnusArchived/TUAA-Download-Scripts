@@ -81,27 +81,23 @@ function run {
   Write-Host "Please make a pull request or DM me on Discord if you`'d like your mirror to be added."
   Write-Host ""
   Write-Host "Which mirror would you like to download from? Please type the number and hit enter."
-  Write-Host "1. Custom (requires an episode list)"
-  Write-Host "2. https://r2.unusann.us/ (Currently shut down)"
-  Write-Host "3. https://rust-lore.dpaste.org/unusannus/"
+  Write-Host "1. https://r2.unusann.us/ (Official)"
+  Write-Host "2. https://rust-lore.dpaste.org/unusannus/"
+  Write-Host "3. Custom (requires an episode list)"
   Write-Host "4. Exit"
   $mirror = Read-Host "Mirror"
 
   switch ($mirror[0]) {
     "1" {
-      custom
+      # official
+      startDl "https://r2.unusann.us" "https://r2.unusann.us/episode-list.txt"
     }
     "2" {
-      # official
-      Clear-Host
-      Write-Host "$esc[1;31mThe official cdn is currently shut down!$esc[0m"
-      Write-Host ""
-      run
-      # startDl "https://r2.unusann.us" "https://r2.unusann.us/episode-list.txt"
-    }
-    "3" {
       # rust lore
       startDl "https://rust-lore.dpaste.org/unusannus" "https://rust-lore.dpaste.org/unusannus/sorted_mp4_list.txt"
+    }
+    "3" {
+      custom
     }
     "4" {
       exit

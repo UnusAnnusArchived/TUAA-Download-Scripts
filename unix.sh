@@ -102,20 +102,16 @@ run() {
   echo ""
   echo "Which mirror would you like to download from? Please type the number and hit enter."
   PS3="Mirror: "
-  select yn in "Custom (requires an episode list)" "https://r2.unusann.us/ (Currently shut down)" "https://rust-lore.dpaste.org/unusannus/" "Exit"; do
+  select yn in "https://r2.unusann.us/ (Official)" "https://rust-lore.dpaste.org/unusannus/" "Custom (requires an episode list)" "Exit"; do
     case ${REPLY::1} in
       1 )
-        custom
+        startDl "https://r2.unusann.us" "https://r2.unusann.us/episode-list.txt"
         break;;
       2 )
-        clear
-        echo -e "\\033[1;31mThe official cdn is currently shut down!\\033[0m"
-        echo ""
-        run
-      #   startDl "https://r2.unusann.us" "https://r2.unusann.us/episode-list.txt"
+        startDl "https://rust-lore.dpaste.org/unusannus" "https://rust-lore.dpaste.org/unusannus/sorted_mp4_list.txt"
         break;;
       3 )
-        startDl "https://rust-lore.dpaste.org/unusannus" "https://rust-lore.dpaste.org/unusannus/sorted_mp4_list.txt"
+        custom
         break;;
       4 ) exit;;
     esac
